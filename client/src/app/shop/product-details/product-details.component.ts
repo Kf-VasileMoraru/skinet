@@ -12,7 +12,7 @@ import { ShopService } from '../shop.service';
 export class ProductDetailsComponent implements OnInit {
   product?: Product;
 
-  constructor(private shopService: ShopService, private activatedRoute: ActivatedRoute,
+  constructor(private shopService: ShopService, private activatedRoute: ActivatedRoute, 
     private bcService: BreadcrumbService) {
       this.bcService.set('@productDetails', ' ')
     }
