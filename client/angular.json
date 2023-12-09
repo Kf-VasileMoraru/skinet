@@ -20,7 +20,7 @@
             "allowedCommonJsDependencies": [
               "cuid"
             ],
-            "outputPath": "../API/wwwroot",
+            "outputPath": "dist/client",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -51,13 +51,6 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
-              "optimization": {
-                "scripts": true,
-                "styles": {
-                  "minify": true,
-                  "inlineCritical": false
-                }
-              },
               "budgets": [
                 {
                   "type": "initial",
@@ -85,11 +78,6 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-            "sslCert": "ssl/localhost.pem",
-            "sslKey": "ssl/localhost-key.pem",
-            "ssl": true
-          },
           "configurations": {
             "production": {
               "browserTarget": "client:build:production"
