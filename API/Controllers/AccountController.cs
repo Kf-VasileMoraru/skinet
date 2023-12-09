@@ -64,6 +64,7 @@ namespace API.Controllers
         {
             if (CheckEmailExistsAsync(registerDto.Email).Result.Value)
             {
+                //vasea
                 return new BadRequestObjectResult(new ApiValidationErrorResponse 
                     { Errors = new[] { "Email address is in use" } });
             }
@@ -87,6 +88,7 @@ namespace API.Controllers
             };
         }
 
+        //vasea - testez Query cu int
         [HttpGet("emailexists")]
         public async Task<ActionResult<bool>> CheckEmailExistsAsync([FromQuery] string email)
         {

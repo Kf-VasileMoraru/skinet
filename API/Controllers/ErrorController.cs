@@ -9,6 +9,7 @@ namespace API.Controllers
     {
         public IActionResult Error(int code)
         {
+            Console.WriteLine("ErrorController.cs: Error(int code) called");
             return new ObjectResult(new ApiResponse(code));
         }
     }
