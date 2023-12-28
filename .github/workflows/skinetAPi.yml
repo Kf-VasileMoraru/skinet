@@ -61,5 +61,5 @@ jobs:
             cd /skinet/dockerDev
             docker stop skinetAPI
             docker rm skinetAPI
-            docker compose -p skinetAPI up -d
+            docker compose -p skinet-api up -d
       
