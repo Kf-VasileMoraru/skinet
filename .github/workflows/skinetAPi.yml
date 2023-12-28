@@ -44,8 +44,8 @@ jobs:
           tags: |
             a2259687814/skinet-api:latest
             a2259687814/skinet-api:${{ github.sha }}
-          cache-from: type=registry,ref=a2259687814/skinetApi:buildcache
-          cache-to: type=registry,ref=a2259687814/skinetApi:buildcache,mode=max
+          cache-from: type=registry,ref=a2259687814/skinet-api:buildcache
+          cache-to: type=registry,ref=a2259687814/skinet-api:buildcache,mode=max
 
 
       - name: Delay for 30s
