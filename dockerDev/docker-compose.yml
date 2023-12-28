@@ -1,0 +1,14 @@
+version: '3.9'
+
+services:
+  dotnet:
+    image: a2259687814/skinetapi:latest
+    container_name: skinetAPI
+    ports:
+      - 32393:80
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - DOTNET_USE_POLLING_FILE_WATCHER=true
+      - ASPNETCORE_URLS=http://+:80
+
+
