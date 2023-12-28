@@ -39,7 +39,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
-          context: ./dockerDev
+          file: Api.Dockerfile
           push: true
           tags: |
             a2259687814/skinet-api:latest
