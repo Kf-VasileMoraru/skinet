@@ -22,7 +22,7 @@ jobs:
           username: root
           key: ${{ secrets.SSH_PRIVATE_KEY }}
 #          rm: true
-          source: "dockerDev/.*"
+          source: "dockerDev/docker-compose.yml"
           target: /skinet
         
 #      - name: Set up Docker Buildx
