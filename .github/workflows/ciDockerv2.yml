@@ -1,0 +1,60 @@
+﻿name: ciDockerv2
+
+on:
+  workflow_dispatch:
+#  push: 
+  
+jobs:
+  build:
+    runs-on: self-hosted
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        
+      - name: copy file via ssh key
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: 10.10.11.101
+          username: root
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+#          rm: true
+          source: "dockerDev/docker-compose.yaml"
+          target: /vasile
+        
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          context: ./dockerDev
+          push: true
+          tags: |
+            a2259687814/vasile-vasile:latest
+            a2259687814/vasile-vasile:${{ github.sha }}
+          cache-from: type=registry,ref=a2259687814/vasile-vasile:buildcache
+          cache-to: type=registry,ref=a2259687814/vasile-vasile:buildcache,mode=max
+          
+
+      - name: Delay for 30s
+        run: sleep 30  
+        
+      - name: Set up SSH
+        uses: appleboy/ssh-action@master
+        with:
+          host: 10.10.11.101
+          username: root
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd /vasile/dockerDev
+            docker stop Vasea-TEST
+            docker rm Vasea-TEST
+            docker compose -p new_stack_name up -d
+      
