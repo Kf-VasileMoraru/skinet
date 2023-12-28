@@ -11,7 +11,7 @@ RUN dotnet restore *.sln
 COPY . .
 
 FROM build AS publish
-RUN dotnet publish *.sln -c Release -o /app/publish /p:UseAppHost=false --no-restore
+RUN dotnet publish *.sln -c Debug -o /app/publish /p:UseAppHost=false --no-restore
 
 FROM base AS final
 WORKDIR /app

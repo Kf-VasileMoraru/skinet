@@ -2,8 +2,8 @@ version: '3.9'
 
 services:
   dotnet:
-    image: a2259687814/skinetapi:latest
-    container_name: skinetAPI
+    image: a2259687814/skinet-api:latest
+    container_name: skinet-api
     ports:
       - 32393:80
     environment:

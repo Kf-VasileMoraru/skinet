@@ -42,8 +42,8 @@ jobs:
           context: ./dockerDev
           push: true
           tags: |
-            a2259687814/skinetApi:latest
-            a2259687814/skinetApi:${{ github.sha }}
+            a2259687814/skinet-api:latest
+            a2259687814/skinet-api:${{ github.sha }}
           cache-from: type=registry,ref=a2259687814/skinetApi:buildcache
           cache-to: type=registry,ref=a2259687814/skinetApi:buildcache,mode=max
 
