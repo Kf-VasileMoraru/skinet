@@ -48,8 +48,8 @@ jobs:
           cache-to: type=registry,ref=a2259687814/skinet-api:buildcache,mode=max
 
 
-      - name: Delay for 30s
-        run: sleep 30  
+      - name: Delay for 5s
+        run: sleep 5  
         
       - name: Set up SSH
         uses: appleboy/ssh-action@master
