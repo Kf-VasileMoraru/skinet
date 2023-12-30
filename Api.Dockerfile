@@ -9,7 +9,7 @@ COPY Core/*.csproj ./Core/
 COPY Infrastructure/*.csproj ./Infrastructure/
 RUN dotnet restore *.sln
 COPY . .
-ENTRYPOINT ["dotnet", "run", "--project", "API/API.csproj"]
+#ENTRYPOINT ["dotnet", "run", "--project", "API/API.csproj"]
 
 
 
