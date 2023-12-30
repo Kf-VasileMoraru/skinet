@@ -16,7 +16,7 @@ FROM build AS publish
 RUN #dotnet publish *.sln -c Debug -o /app/publish /p:UseAppHost=false
 RUN dotnet build *.sln -c Debug -o /app/publish /p:UseAppHost=false
 WORKDIR /app/publish
-ENTRYPOINT ["dotnet", "run"]
+
 
 #FROM base AS final
 #WORKDIR /app
