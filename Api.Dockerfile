@@ -10,10 +10,13 @@ COPY Infrastructure/*.csproj ./Infrastructure/
 RUN dotnet restore *.sln
 COPY . .
 
+
+
 FROM build AS publish
-RUN dotnet publish *.sln -c Debug -o /app/publish /p:UseAppHost=false
+RUN #dotnet publish *.sln -c Debug -o /app/publish /p:UseAppHost=false
+RUN dotnet build *.sln -c Debug -o /app/publish /p:UseAppHost=false
 WORKDIR /app/publish
-ENTRYPOINT ["dotnet", "API.dll"]
+ENTRYPOINT ["dotnet", "run"]
 
 #FROM base AS final
 #WORKDIR /app
