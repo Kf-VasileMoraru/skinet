@@ -6,6 +6,7 @@ services:
     container_name: skinet-api
     ports:
       - 32393:80
+      - 32394:5001
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - DOTNET_USE_POLLING_FILE_WATCHER=true
