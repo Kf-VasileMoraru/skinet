@@ -12,15 +12,15 @@ jobs:
 #      - name: Checkout
 #        uses: actions/checkout@v4
 
-      - name: copy file via ssh key
-        uses: appleboy/scp-action@v0.1.4
-        with:
-          host: 10.10.11.101
-          username: root
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-#          rm: true
-          source: "dockerDev/docker-compose.yml"
-          target: /skinet
+#      - name: copy file via ssh key
+#        uses: appleboy/scp-action@v0.1.4
+#        with:
+#          host: 10.10.11.101
+#          username: root
+#          key: ${{ secrets.SSH_PRIVATE_KEY }}
+##          rm: true
+#          source: "dockerDev/docker-compose.yml"
+#          target: /skinet
 
       - name: Copy appsettings.json
         run: |
