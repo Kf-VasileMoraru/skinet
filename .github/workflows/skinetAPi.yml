@@ -63,7 +63,10 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             cd /skinet/dockerDev
-            docker stop skinet-api
-            docker rm skinet-api
+#            docker stop skinet-api
+#            docker rm skinet-api
+            docker compose stop
+            docker compose rm -f
+            docker compose pull
             docker compose -p skinet-api up -d
       
