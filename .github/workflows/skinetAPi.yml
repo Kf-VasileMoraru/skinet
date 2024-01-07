@@ -24,8 +24,8 @@ jobs:
 
       - name: Copy appsettings.json
         run: |
-          cp ../../../../savedConf/appsettings.json ./appsettings..json
-          cp ../../../../savedConf/appsettings.Development.json ./appsettings.Development.json
+          cp ../../../../savedConf/appsettings.json ./API/appsettings.json
+          cp ../../../../savedConf/appsettings.Development.json ./API/appsettings.Development.json
           
       - name: Delay for 5s
         run: sleep 5
