@@ -1,0 +1,69 @@
+﻿name: skinetAPi
+
+on:
+  workflow_dispatch:
+#  push: 
+  
+jobs:
+  build:
+    runs-on: self-hosted
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: copy file via ssh key
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: 10.10.11.101
+          username: root
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+#          rm: true
+          source: "dockerDev/docker-compose.yml"
+          target: /skinet
+
+      - name: Copy appsettings.json
+        run: |
+          cp ../../../../savedConf/appsettings.json ./API/appsettings.json
+          cp ../../../../savedConf/appsettings.Development.json ./API/appsettings.Development.json
+          
+      - name: Delay for 5s
+        run: sleep 5
+      
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: Api.Dockerfile
+          push: true
+          tags: |
+            a2259687814/skinet-api:latest
+            a2259687814/skinet-api:${{ github.sha }}
+          cache-from: type=registry,ref=a2259687814/skinet-api:buildcache
+          cache-to: type=registry,ref=a2259687814/skinet-api:buildcache,mode=max
+
+
+      - name: Delay for 5s
+        run: sleep 5  
+        
+      - name: Set up SSH
+        uses: appleboy/ssh-action@master
+        with:
+          host: 10.10.11.101
+          username: root
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd /skinet/dockerDev
+            docker compose stop
+            docker compose rm -f
+            docker compose pull
+            docker compose -p skinet-api up -d

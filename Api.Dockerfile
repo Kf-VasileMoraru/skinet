@@ -9,13 +9,18 @@ COPY Core/*.csproj ./Core/
 COPY Infrastructure/*.csproj ./Infrastructure/
 RUN dotnet restore *.sln
 COPY . .
+#CMD ["dotnet", "run", "--project", "API/API.csproj", "--configuration", "Debug"]
+
+
 
 FROM build AS publish
-RUN dotnet publish *.sln -c Release -o /app/publish /p:UseAppHost=false --no-restore
+RUN dotnet publish *.sln -c Debug --property:PublishDir=/app/publish /p:UseAppHost=false
+WORKDIR /app/publish
+
 
 FROM base AS final
 WORKDIR /app
 COPY  --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "API.dll"]
+CMD ["dotnet", "API.dll"]
 
 

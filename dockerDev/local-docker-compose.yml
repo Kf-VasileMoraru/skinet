@@ -1,0 +1,17 @@
+version: '3.9'
+
+services:
+  dotnet:
+    build:
+        context: ../
+        dockerfile: Api.Dockerfile
+    container_name: skinet-api
+    ports:
+      - 32393:80
+      - 32394:5001
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - DOTNET_USE_POLLING_FILE_WATCHER=true
+      - ASPNETCORE_URLS=http://+:80
+
+
