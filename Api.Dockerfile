@@ -11,12 +11,9 @@ RUN dotnet restore *.sln
 COPY . .
 #CMD ["dotnet", "run", "--project", "API/API.csproj", "--configuration", "Debug"]
 
-
-
 FROM build AS publish
 RUN dotnet publish *.sln -c Debug --property:PublishDir=/app/publish /p:UseAppHost=false
 WORKDIR /app/publish
-
 
 FROM base AS final
 WORKDIR /app

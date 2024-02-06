@@ -4,6 +4,7 @@
       <settings>
         <option name="envFilePath" value="" />
         <option name="removeOrphansOnComposeDown" value="false" />
+        <option name="commandLineOptions" value="--build" />
         <option name="sourceFilePath" value="dockerDev/local-docker-compose.yml" />
       </settings>
     </deployment>
