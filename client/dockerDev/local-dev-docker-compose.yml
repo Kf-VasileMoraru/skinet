@@ -1,0 +1,12 @@
+version: '3.9'
+
+services:
+  Angular:
+    build:
+      context: ../
+      dockerfile: Client-Dev.Dockerfile
+    pull_policy: build
+    image: angular-image
+    container_name: Angular-Container
+    ports:
+      - "4300:4200"

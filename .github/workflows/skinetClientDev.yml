@@ -1,4 +1,4 @@
-﻿name: skinetAPi
+﻿name: skinetClientDev
 
 on:
   workflow_dispatch:
@@ -19,14 +19,9 @@ jobs:
           username: root
           key: ${{ secrets.SSH_PRIVATE_KEY }}
 #          rm: true
-          source: "dockerDev/docker-compose.yml"
-          target: /skinet
+          source: "client/dockerDev/docker-compose.yml"
+          target: /skinet-client
 
-      - name: Copy appsettings.json
-        run: |
-          cp ../../../../savedConf/appsettings.json ./API/appsettings.json
-          cp ../../../../savedConf/appsettings.Development.json ./API/appsettings.Development.json
-          
       - name: Delay for 5s
         run: sleep 5
       
@@ -42,15 +37,14 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
-          context: .
-          file: Api.Dockerfile
+          context: ./client
+          file: ./client/Client-Dev.Dockerfile
           push: true
           tags: |
-            a2259687814/skinet-api:latest
-            a2259687814/skinet-api:${{ github.sha }}
-          cache-from: type=registry,ref=a2259687814/skinet-api:buildcache
-          cache-to: type=registry,ref=a2259687814/skinet-api:buildcache,mode=max
-
+            a2259687814/skinet-front-dev:latest
+            a2259687814/skinet-front-dev:${{ github.sha }}
+          cache-from: type=registry,ref=a2259687814/skinet-front-dev:buildcache
+          cache-to: type=registry,ref=a2259687814/skinet-front-dev:buildcache,mode=max
 
       - name: Delay for 5s
         run: sleep 5  
@@ -62,8 +56,6 @@ jobs:
           username: root
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            cd /skinet/dockerDev
-            docker compose stop
-            docker compose rm -f
+            cd /skinet-client/client/dockerDev/
             docker compose pull
             docker compose -p skinet-project up -d
