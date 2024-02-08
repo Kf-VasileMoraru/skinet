@@ -54,7 +54,9 @@ namespace API.Extensions
             {
                 opt.AddPolicy("CorsPolicy", policy => 
                 {
-                    policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://skinet-dev.evlavie.page");
+                    policy.AllowAnyHeader().AllowAnyMethod()
+                        .WithOrigins("https://skinet-dev.evlavie.page")
+                        .WithOrigins("https://skinet-prod.evlavie.page");
                 });
             });
 

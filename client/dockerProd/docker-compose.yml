@@ -1,0 +1,10 @@
+version: '3.9'
+
+services:
+  skinet-client-prod:
+    image: a2259687814/skinet-client-prod:latest
+    container_name: skinet-client-prod
+    restart: always
+    pull_policy: always
+    ports:
+      - 32396:80

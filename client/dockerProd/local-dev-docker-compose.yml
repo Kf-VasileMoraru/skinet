@@ -1,0 +1,13 @@
+version: '3.9'
+
+services:
+  skinet-client-prod:
+    build:
+      context: ../
+      dockerfile: Client-Prod.Dockerfile
+    container_name: skinet-client-prod
+    image: skinet-client-prod
+    pull_policy: build
+    restart: always
+    ports:
+      - "32396:80"
