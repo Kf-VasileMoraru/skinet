@@ -4,6 +4,7 @@ services:
   skinet-client-dev:
     image: a2259687814/skinet-front-dev:latest
     container_name: skinet-client-dev
+    restart: always
+    pull_policy: always
     ports:
       - 32395:4200
-    restart: always

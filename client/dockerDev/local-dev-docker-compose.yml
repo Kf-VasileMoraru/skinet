@@ -1,12 +1,13 @@
 version: '3.9'
 
 services:
-  Angular:
+  skinet-client-dev:
     build:
       context: ../
       dockerfile: Client-Dev.Dockerfile
+    container_name: skinet-client-dev
+    image: skinet-client-dev
     pull_policy: build
-    image: angular-image
-    container_name: Angular-Container
+    restart: always
     ports:
       - "4300:4200"

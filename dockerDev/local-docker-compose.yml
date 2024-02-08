@@ -1,11 +1,14 @@
 version: '3.9'
 
 services:
-  dotnet:
+  skinet-api:
     build:
         context: ../
         dockerfile: Api.Dockerfile
     container_name: skinet-api
+    image: skinet-api
+    pull_policy: build
+    restart: always
     ports:
       - 32393:80
       - 32394:5001

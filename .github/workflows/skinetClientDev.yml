@@ -57,5 +57,4 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             cd /skinet-client/client/dockerDev/
-            docker compose pull
             docker compose -p skinet-project up -d

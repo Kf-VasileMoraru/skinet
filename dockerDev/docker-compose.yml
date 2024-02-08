@@ -5,6 +5,7 @@ services:
     image: a2259687814/skinet-api:latest
     container_name: skinet-api
     restart: always
+    pull_policy: always
     ports:
       - 32393:80
       - 32394:5001
